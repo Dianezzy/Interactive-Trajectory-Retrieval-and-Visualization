@@ -3,8 +3,9 @@ import sys
 import os
 import numpy as np
 from frechetdist import frdist
+from preprocess import preprocess
 from dtw_dist import *
-from LCSS import LCSS
+from LCSS import LCSS, LCSS_v2
 
 from frechetdist import frdist
 
@@ -54,14 +55,13 @@ def test_main():
     # print(dist)
 
     # test LCSS
-    p_t = [1.87, 2.83, 3.44, 4.56]
-    p_x = [0.87, 2.87, 10.44, 2.56]
-    p_y = [2.87, 0.83, 13.44, 7.56]
-    q_t = [1.87, 2.83, 3.44, 4.56]
-    q_x = [0.87, 2.87, 10.44, 2.56]
-    q_y = [3.87, 1.83, 44.44, 8.56]
-    dist = LCSS(p_t, p_x, p_y, q_t, q_x, q_y)
-    print(dist) #very wrong
+    px, py, pxy = preprocess("data/test/31/movement_31.json", 203138)
+    qx, qy, qxy = preprocess("data/test/31/movement_31.json", 203477)
+    similarity1 = LCSS(px, py, qx, qy)
+    print(similarity1)
+
+    # similarity2 = LCSS_v2(pxy, qxy)
+    # print("res:",similarity2)
 
 
 

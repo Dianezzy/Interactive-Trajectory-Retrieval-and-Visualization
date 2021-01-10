@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/discrete_frechet.iml" filepath="$PROJECT_DIR$/.idea/discrete_frechet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/trajectory similarity.iml" filepath="$PROJECT_DIR$/.idea/trajectory similarity.iml" />
     </modules>
   </component>
 </project>

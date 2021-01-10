@@ -18,7 +18,7 @@ class SAX(object):
     such strings using a lookup table.
     """
 
-    def __init__(self, wordSize = 8, alphabetSize = 7, epsilon = 1e-6):
+    def __init__(self, wordSize = 18, alphabetSize = 10, epsilon = 1e-6):
 
         if alphabetSize < 3 or alphabetSize > 20:
             raise DictionarySizeIsNotSupported()
@@ -159,13 +159,10 @@ class SAX(object):
                     low_num = np.min([number_rep[i], number_rep[j]])
                     self.compareDict[letters[i]+letters[j]] = self.beta[high_num] - self.beta[low_num]
 
-    def sliding_window(self, x, numSubsequences = None, overlappingFraction = None):
-        if not numSubsequences:
-            numSubsequences = 20
-        self.windowSize = int(len(x)/numSubsequences)
-        if not overlappingFraction:
-            overlappingFraction = 0.9
-        overlap = self.windowSize*overlappingFraction
+    def sliding_window(self, x, windowSize):
+
+        self.windowSize = windowSize
+        overlap = 0
         moveSize = int(self.windowSize - overlap)
         if moveSize < 1:
             raise OverlapSpecifiedIsNotSmallerThanWindowSize()
