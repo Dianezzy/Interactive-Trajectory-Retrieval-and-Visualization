@@ -2,7 +2,9 @@
 import sys
 import os
 import numpy as np
-import pytest
+from frechetdist import frdist
+from dtw_dist import *
+from LCSS import LCSS
 
 from frechetdist import frdist
 
@@ -36,24 +38,51 @@ TEST_CASES = [
 
 
 def test_main():
-    for test_case in TEST_CASES:
-        P = test_case['P']
-        Q = test_case['Q']
-        eo = test_case['expected']
 
-        assert frdist(P, Q) == eo
+    # # test frechet dist
+    # for test_case in TEST_CASES:
+    #     P = test_case['P']
+    #     Q = test_case['Q']
+    #     # assert frdist(P, Q) == eo
+    #     dtwdist(P, Q)
 
 
-def test_errors():
+    # # test dtw dist
+    # p = [[0,1,1], [1,2,1], [2,2,2], [3,3,3]]
+    # q = [[0, 1, 2], [1, 2, 2], [2, 2, 3], [3, 3, 4]]
+    # dist, _, _ = my_dtw(p, q)
+    # print(dist)
 
-    P = [[1, 1], [2, 1]]
-    Q = [[2, 2], [0, 1], [2, 4]]
+    # test LCSS
+    p_t = [1.87, 2.83, 3.44, 4.56]
+    p_x = [0.87, 2.87, 10.44, 2.56]
+    p_y = [2.87, 0.83, 13.44, 7.56]
+    q_t = [1.87, 2.83, 3.44, 4.56]
+    q_x = [0.87, 2.87, 10.44, 2.56]
+    q_y = [3.87, 1.83, 44.44, 8.56]
+    dist = LCSS(p_t, p_x, p_y, q_t, q_x, q_y)
+    print(dist) #very wrong
 
-    with pytest.raises(ValueError):
-        assert frdist(P, Q) == 2.0
 
-    P = []
-    Q = [[2, 2], [0, 1], [2, 4]]
 
-    with pytest.raises(ValueError):
-        assert frdist(P, Q) == 2.0
+
+
+
+#
+# def test_errors():
+#
+#     P = [[1, 1], [2, 1]]
+#     Q = [[2, 2], [0, 1], [2, 4]]
+#
+#     with pytest.raises(ValueError):
+#         assert frdist(P, Q) == 2.0
+#
+#     P = []
+#     Q = [[2, 2], [0, 1], [2, 4]]
+#
+#     with pytest.raises(ValueError):
+#         assert frdist(P, Q) == 2.0
+
+
+if __name__ == '__main__':
+        test_main()
