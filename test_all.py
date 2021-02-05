@@ -3,9 +3,10 @@ import sys
 import os
 import numpy as np
 from frechetdist import frdist
-from preprocess import preprocess
+from preprocess import player2trajectory
 from dtw_dist import *
-from LCSS import LCSS, LCSS_v2
+from LCSS import LCSS
+from edit_dist import edit_dist
 
 from frechetdist import frdist
 
@@ -54,10 +55,11 @@ def test_main():
     # dist, _, _ = my_dtw(p, q)
     # print(dist)
 
-    # test LCSS
-    px, py, pxy = preprocess("data/test/31/movement_31.json", 203138)
-    qx, qy, qxy = preprocess("data/test/31/movement_31.json", 203477)
-    similarity1 = LCSS(px, py, qx, qy)
+    # test LCSS & edit distance
+    px, py, pxy = player2trajectory("data/test/31/movement_31.json", 203138)
+    qx, qy, qxy = player2trajectory("data/test/31/movement_31.json", 203477)
+    #similarity1 = LCSS(px, py, qx, qy)
+    similarity1 = edit_dist(px, py, qx, qy)
     print(similarity1)
 
     # similarity2 = LCSS_v2(pxy, qxy)

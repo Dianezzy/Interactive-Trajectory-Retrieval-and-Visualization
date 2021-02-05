@@ -1,8 +1,19 @@
+from utils import num2str
+import numpy as np
+from utils import WINDOW_SIZE
+
+def edit_dist(px, py, qx, qy):
+    px_str, py_str = num2str(px, py)
+    qx_str, qt_str = num2str(qx, qy)
+    # for px in px_str:
+
+    edit_x = _edit_dist(px_str, qx_str)
+    edit_y = _edit_dist(py_str, qt_str)
+    edit = edit_x * edit_x + edit_y * edit_y
+    return edit
 
 
-
-
-def _edit_dist(self, word1, word2):
+def _edit_dist(word1, word2):
     """
     :type word1: str
     :type word2: str

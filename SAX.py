@@ -3,7 +3,7 @@
 import os
 import numpy as np
 import math
-
+STEP = 10
 
 class DictionarySizeIsNotSupported(Exception): pass
 class StringsAreDifferentLength(Exception): pass
@@ -129,7 +129,7 @@ class SAX(object):
         list_letters_b = [x for x in sB]
         mindist = 0.0
         for i in range(0, len(list_letters_a)):
-            if list_letters_a[i] is not '-' and list_letters_b[i] is not '-':
+            if list_letters_a[i] != '-' and list_letters_b[i] != '-':
                 mindist += self.compare_letters(list_letters_a[i], list_letters_b[i])**2
         mindist = self.scalingFactor* np.sqrt(mindist)
         return mindist
@@ -162,7 +162,7 @@ class SAX(object):
     def sliding_window(self, x, windowSize):
 
         self.windowSize = windowSize
-        overlap = 0
+        overlap = windowSize - STEP
         moveSize = int(self.windowSize - overlap)
         if moveSize < 1:
             raise OverlapSpecifiedIsNotSmallerThanWindowSize()
